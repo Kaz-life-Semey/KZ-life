@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KZ LIFE - Complete</title><style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}body{margin:0;background:#0f0f0f;color:#fff;padding-bottom:85px}
+.hidden{display:none!important}.wrap{max-width:430px;margin:0 auto;padding:14px}
+.top{position:sticky;top:0;background:#111;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #333;z-index:10;font-size:13px}
+.card{background:#1c1c1c;border-radius:20px;padding:20px;margin-top:14px}
+h1,h2{text-align:center}input,select{width:100%;padding:12px;margin:7px 0;border-radius:12px;border:1px solid #333;background:#222;color:#fff;font-size:15px}
+.btn{width:100%;padding:13px;border:none;border-radius:12px;font-size:16px;font-weight:800;cursor:pointer;margin-top:9px}
+.green{background:#00e5b8;color:#000}.white{background:#fff;color:#000}.ghost{background:transparent;color:#fff;border:1px solid #444}.red{background:#ff4444;color:#fff}
+.opt{padding:12px;border:2px solid #333;border-radius:12px;margin:7px 0;cursor:pointer;background:#222}.opt.active{border-color:#00e5b8;background:#0a2e28}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:1px solid #333;display:flex;justify-content:space-around;padding:9px 0;z-index:20}
+.bottom div{text-align:center;font-size:11px;cursor:pointer;flex:1}.bottom span{font-size:23px;display:block}
+.statbar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:10px}.statbar div{background:#222;padding:9px;border-radius:12px;text-align:center;font-size:12px}.statbar b{display:block;font-size:15px;color:#00e5b8}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:11px}.job{background:#222;border-radius:14px;padding:13px;text-align:center;cursor:pointer}.job span{font-size:26px;display:block}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:flex-end;justify-content:center;z-index:30}.modal>div{background:#1c1c1c;width:100%;max-width:430px;border-radius:20px 20px 0 0;padding:20px;max-height:88vh;overflow:auto}
+.house{width:100%;height:130px;border-radius:16px;display:flex;align-items:flex-end;padding:12px;font-weight:900;font-size:19px;margin-top:10px}
+.bar{height:8px;background:#333;border-radius:10px;overflow:hidden;margin-top:4px}.bar i{display:block;height:100%;background:#00e5b8}
+</style></head><body>
+
+<div id="topbar" class="top hidden"><b>🇰🇿 KZ LIFE</b><div><span id="t-money">💰 0</span> • <span id="t-day">Day 1</span></div></div>
+<div class="wrap">
+
+<!-- STEP 1 SIGNUP -->
+<div id="s1"><h1>🇰🇿 KZ LIFE</h1><p style="text-align:center;color:#aaa">Semey Life Game • Like Lagos Life</p><div class="card">
+<h2>📝 SIGNUP</h2><input id="su-user" placeholder="Username — Semey_Batyr"><input id="su-pass" type="password" placeholder="Password"><input id="su-pass2" type="password" placeholder="Repeat Password">
+<select id="su-q"><option>Favourite food?</option><option>City you were born?</option><option>Pet name?</option></select><input id="su-a" placeholder="Answer">
+<label style="font-size:13px"><input type="checkbox" checked style="width:auto"> Remember me</label>
+<button class="btn green" onclick="goS2()">✅ SIGNUP</button>
+<p style="text-align:center;font-size:14px">Have account? <a href="#" onclick="show('s1l');return false" style="color:#00e5b8">Login</a></p>
+<button class="btn ghost" onclick="goS2()">👤 Continue as Guest</button></div></div>
+<div id="s1l" class="hidden"><div class="card"><h2>🔑 LOGIN</h2><input id="li-user" placeholder="Username"><input type="password" placeholder="Password"><button class="btn green" onclick="goS2()">LOGIN</button><button class="btn ghost" onclick="show('s1')">Back</button></div></div>
+
+<!-- STEP 2 LANGUAGE -->
+<div id="s2" class="hidden"><h2>🌍 STEP 2 — Language</h2><div class="card">
+<div class="opt active" id="lang-kz" onclick="setLang('kz')">🇰🇿 Қазақша</div>
+<div class="opt" id="lang-ru" onclick="setLang('ru')">🇷🇺 Русский</div>
+<p style="text-align:center;color:#aaa;font-size:13px" id="lang-note">Тілді таңда • Choose language</p>
+<button class="btn green" onclick="show('s3')">NEXT ➡️</button></div></div>
+
+<!-- STEP 3 CHARACTER -->
+<div id="s3" class="hidden"><h2>👤 STEP 3 — Create Character</h2><div class="card">
+<label>Name</label><input id="c-name" placeholder="Напиши имя...">
+<label>Gender</label><div class="opt active" id="g-boy" onclick="setG('boy')">👦 Парень</div><div class="opt" id="g-girl" onclick="setG('girl')">👧 Девушка</div>
+<label>Look</label><div class="opt active" id="look-1" onclick="setLook(1,'🧑‍🦱 Short Hair')">🧑‍🦱 Short Hair</div><div class="opt" id="look-2" onclick="setLook(2,'👩‍🦰 Long Hair')">👩‍🦰 Long Hair</div><div class="opt" id="look-3" onclick="setLook(3,'🧔 Beard')">🧔 Beard</div>
+<label>Age</label><select id="c-age"><option>18</option><option>19</option><option>20</option><option>21</option></select>
+<label>Personality</label><div class="opt active" id="p-chill" onclick="setP('Chill')">😎 Chill</div><div class="opt" id="p-hustle" onclick="setP('Hustler')">💪 Hustler</div><div class="opt" id="p-smart" onclick="setP('Smart')">🧠 Smart</div>
+<label>Dream</label><select id="c-dream"><option>Become Rich</option><option>Become Famous</option><option>Buy Big House</option><option>Open Business</option></select>
+<label>City</label><select id="c-city"><option>Semey</option><option>Almaty</option><option>Astana</option><option>Shymkent</option></select>
+<button class="btn green" onclick="show('s4')">NEXT ➡️ BIRTH LOTTERY</button></div></div>
+
+<!-- STEP 4 LOTTERY -->
+<div id="s4" class="hidden"><h2>🎲 STEP 4 — Birth Lottery</h2><div class="card" style="text-align:center"><div style="font-size:55px">🎰</div><p>Where will you be born?</p><h2 id="lot-res">???</h2><p id="lot-desc"></p><button class="btn green" id="lot-btn" onclick="doLot()">SPIN!</button><button class="btn white hidden" id="lot-next" onclick="buildHomes();show('s5')">CONTINUE ➡️</button></div></div>
+
+<!-- STEP 5 HOME -->
+<div id="s5" class="hidden"><h2>🏠 STEP 5 — Choose Home</h2><p style="text-align:center" id="home-info"></p><div id="home-list"></div><button class="btn green" onclick="startGame()">▶️ START LIFE</button></div>
+
+<!-- STEP 6 GAME -->
+<div id="s6" class="hidden">
+<div class="statbar"><div>💰<b id="money">0</b>Money</div><div>⚡<b id="energy">100</b>Energy</div><div>🍔<b id="hunger">80</b>Hunger</div><div>😊<b id="mood">70</b>Mood</div><div>❤️<b id="health">100</b>Health</div><div>🧠<b id="skill">1</b>Skill Lv</div></div>
+<div class="house" id="house-view"><span id="house-name"></span></div>
+<p style="text-align:center;font-size:13px" id="char-info"></p>
+<div id="event-box" class="card" style="background:#2a2200;border:1px solid #ffcc00;display:none"><b>🎲 EVENT!</b><p id="event-text"></p><button class="btn green" onclick="closeEvent()">OK</button></div>
+<div class="card"><h3>👤 What should <span id="char-name2"></span> do?</h3>
+<div class="grid"><div class="job" onclick="act('work')"><span>💼</span>Work<br><small id="job-label">+ Money</small></div><div class="job" onclick="act('eat')"><span>🍔</span>Eat Beshbarmak<br><small>-500 ₸</small></div><div class="job" onclick="act('study')"><span>📚</span>Study<br><small>+ Skill</small></div><div class="job" onclick="act('train')"><span>💪</span>Train<br><small>+ Health</small></div><div class="job" onclick="act('sleep')"><span>😴</span>Sleep<br><small>Next Day</small></div><div class="job" onclick="act('social')"><span>👥</span>Meet Friends<br><small>+ Mood</small></div></div>
+<div style="margin-top:12px"><b>Skill Progress</b><div class="bar"><i id="skill-bar" style="width:10%"></i></div></div>
+<div id="log" style="background:#222;border-radius:12px;padding:12px;margin-top:12px;font-size:14px">Welcome! Tutorial: Tap 📱 Phone → Get a Job → Tap Work!</div>
+<button class="btn ghost" onclick="dailyReward()">🎁 Claim Daily Reward +1000 ₸</button>
+</div></div>
+
+</div>
+<div id="bottom" class="bottom hidden"><div onclick="openTab('map')"><span>🗺️</span>Map</div><div onclick="openTab('phone')"><span>📱</span>Phone</div><div onclick="openTab('home')"><span>🏠</span>Home</div><div onclick="openTab('buy')"><span>🛒</span>Buy</div><div onclick="openTab('me')"><span>👤</span>Me</div></div>
+<div id="modal" class="modal hidden"><div id="modal-content"></div></div>
+<script>
+let lang='kz',gender='boy',look='🧑‍🦱 Short Hair',pers='Chill',money=0,energy=100,hunger=80,mood=70,health=100,skill=1,skillXp=10,day=1,type='',home='',job='No Job',jobPay=3000,loan=0,car='No Car',friends=0;
+function show(id){['s1','s1l','s2','s3','s4','s5','s6'].forEach(s=>document.getElementById(s).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');window.scrollTo(0,0);}
+function goS2(){let p=document.getElementById('su-pass').value,p2=document.getElementById('su-pass2').value;if(p&&p!==p2){alert('Passwords do not match!');return;}localStorage.setItem('kz_user',document.getElementById('su-user').value||'Guest');show('s2');}
+function setLang(l){lang=l;document.getElementById('lang-kz').classList.toggle('active',l=='kz');document.getElementById('lang-ru').classList.toggle('active',l=='ru');}
+function setG(g){gender=g;document.getElementById('g-boy').classList.toggle('active',g=='boy');document.getElementById('g-girl').classList.toggle('active',g=='girl');}
+function setLook(n,t){look=t;[1,2,3].forEach(i=>document.getElementById('look-'+i).classList.toggle('active',i==n));}
+function setP(p){pers=p;['chill','hustle','smart'].forEach(x=>document.getElementById('p-'+x).classList.toggle('active',x==p.toLowerCase().replace('hustler','hustle')));}
+function doLot(){let r=Math.random()<0.5;if(r){type='BAY BALA 💎';money=500000;loan=0;document.getElementById('lot-desc').textContent='Born RICH! Bank: 500,000 ₸. Like Nepo Baby!';}else{type='KARAPAYIM BALA 💪';money=5000;loan=20000;document.getElementById('lot-desc').textContent='Start small + LOAN 20,000 ₸ to pay back! Like Lapo Baby!';}document.getElementById('lot-res').textContent=type;document.getElementById('lot-btn').classList.add('hidden');document.getElementById('lot-next').classList.remove('hidden');}
+function buildHomes(){let h='';if(type.includes('BAY')){h='<div class="opt active" onclick="pickHome(this,\'Big Villa - Semey\')">🏰 Big Villa - Semey - FREE</div><div class="opt" onclick="pickHome(this,\'Apartment - Almaty\')">🏢 Apartment - Almaty</div>';home='Big Villa - Semey';}else{h='<div class="opt active" onclick="pickHome(this,\'Small Flat - Semey\')">🏠 Small Flat - Semey - 5000 ₸/week</div><div class="opt" onclick="pickHome(this,\'Shared Room\')">🛏️ Shared Room</div>';home='Small Flat - Semey';}document.getElementById('home-list').innerHTML=h;document.getElementById('home-info').textContent=type+' • '+money+' ₸ • Loan: '+loan+' ₸';}
+function pickHome(el,n){home=n;document.querySelectorAll('#home-list .opt').forEach(o=>o.classList.remove('active'));el.classList.add('active');}
+function startGame(){let n=document.getElementById('c-name').value||'Batyr';let city=document.getElementById('c-city').value;document.getElementById('topbar').classList.remove('hidden');document.getElementById('bottom').classList.remove('hidden');document.getElementById('char-info').textContent=(gender=='boy'?'👦':'👧')+' '+n+' • '+look+' • Age '+document.getElementById('c-age').value+' • '+pers+' • '+type+' • '+city+' • Dream: '+document.getElementById('c-dream').value+' • Lang: '+(lang=='kz'?'Қазақша':'Русский');document.getElementById('char-name2').textContent=n;document.getElementById('house-name').textContent='🏠 '+home;document.getElementById('house-view').style.background=type.includes('BAY')?'linear-gradient(135deg,#f6d365,#fda085)':'linear-gradient(135deg,#667eea,#764ba2)';update();show('s6');save();}
+function update(){document.getElementById('money').textContent=money+' ₸';document.getElementById('t-money').textContent='💰 '+money+' ₸';document.getElementById('t-day').textContent='Day '+day;document.getElementById('energy').textContent=energy;document.getElementById('hunger').textContent=hunger;document.getElementById('mood').textContent=mood;document.getElementById('health').textContent=health;document.getElementById('skill').textContent=skill;document.getElementById('skill-bar').style.width=skillXp+'%';document.getElementById('job-label').textContent=job+' • +'+jobPay+' ₸';}
+function save(){localStorage.setItem('kz_save',JSON.stringify({money,energy,hunger,mood,health,skill,day,loan,car,job,jobPay,friends,home,type}));}
+function act(a){if(a=='work'){if(energy<20){document.getElementById('log').textContent='Too tired! Eat / Sleep!';return;}if(job=='No Job'){document.getElementById('log').textContent='No Job! Go to Phone → Jobs first!';openTab('phone');return;}money+=jobPay;energy-=20;hunger-=10;skillXp+=5;document.getElementById('log').textContent='Worked as '+job+'! +'+jobPay+' ₸';}if(a=='eat'){if(money<500){document.getElementById('log').textContent='No money! Work first!';return;}money-=500;hunger+=30;energy+=10;health+=5;document.getElementById('log').textContent='Ate Beshbarmak! + Hunger + Energy';}if(a=='study'){skillXp+=10;energy-=10;mood+=5;document.getElementById('log').textContent='Studied! + Skill XP';}if(a=='train'){energy-=15;health+=10;mood+=5;document.getElementById('log').textContent='Trained! + Health';}if(a=='social'){friends++;mood+=15;energy-=5;document.getElementById('log').textContent='Met friends! Friends: '+friends+' • + Mood';}if(a=='sleep'){day++;energy=100;hunger-=15;randomEvent();if(day%7==0){money-=5000;document.getElementById('log').textContent='🏠 Rent -5000 ₸ Baba Landlord came! Day '+day;}else document.getElementById('log').textContent='New Day! Day '+day;}if(skillXp>=100){skill++;skillXp=0;document.getElementById('log').textContent='🎉 LEVEL UP! Skill Lv '+skill+'! Pay is higher!';jobPay+=500;}if(energy>100)energy=100;if(hunger>100)hunger=100;if(mood>100)mood=100;if(health>100)health=100;if(energy<0)energy=0;if(hunger<0)hunger=0;update();save();}
+function randomEvent(){let r=Math.random();if(r<0.2){money+=2000;showEvent('You found 2000 ₸ on the street in Semey! Lucky!');}else if(r<0.35){money-=1000;showEvent('Oh no! Phone stolen! -1000 ₸ to fix.');}else if(r<0.5){mood+=10;showEvent('Friend invited you to Irtysh River! + Mood!');}}
+function showEvent(t){document.getElementById('event-text').textContent=t;document.getElementById('event-box').style.display='block';}
+function closeEvent(){document.getElementById('event-box').style.display='none';}
+function dailyReward(){money+=1000;document.getElementById('log').textContent='🎁 Daily Reward! +1000 ₸';update();save();}
+function openTab(t){let c=document.getElementById('modal-content');document.getElementById('modal').classList.remove('hidden');
+if(t=='map')c.innerHTML='<h2>🗺️ Semey Map</h2><div class="opt" onclick="visit(\'Central Bazaar\')">🏪 Central Bazaar - Buy food</div><div class="opt" onclick="visit(\'Abay Museum\')">🏛️ Abay Museum - + Mood</div><div class="opt" onclick="visit(\'Irtysh River\')">🌊 Irtysh River - Relax</div><div class="opt" onclick="visit(\'Night Club\')">🎉 Night Club - + Mood - Money</div><div class="opt" onclick="visit(\'School\')">🏫 School - + Skill</div><div class="opt" onclick="visit(\'Hospital\')">🏥 Hospital - + Health</div><button class="btn ghost" onclick="closeModal()">Close</button>';
+if(t=='phone')c.innerHTML='<h2>📱 Phone</h2><p><b>Jobs:</b></p><div class="opt" onclick="takeJob(\'Bazaar Seller\',3000)">💼 Bazaar Seller - 3000 ₸</div><div class="opt" onclick="takeJob(\'Taxi Driver\',5000)">🚕 Taxi Driver - 5000 ₸</div><div class="opt" onclick="takeJob(\'Cafe Worker\',4000)">☕ Cafe Worker - 4000 ₸</div><div class="opt" onclick="takeJob(\'Courier\',3500)">🛵 Courier - 3500 ₸</div><p><b>Bank:</b> Money '+money+' ₸ • Loan '+loan+' ₸</p><button class="btn green" onclick="payLoan()">Pay Loan 5000 ₸</button><p><b>Friends:</b> '+friends+' friends</p><button class="btn ghost" onclick="closeModal()">Close</button>';
+if(t=='home')c.innerHTML='<h2>🏠 My Home</h2><p>'+home+'</p><p>Rent 5000 ₸ every 7 days • Car: '+car+'</p><button class="btn green" onclick="closeModal()">Back Home</button>';
+if(t=='buy')c.innerHTML='<h2>🛒 Buy</h2><div class="opt" onclick="buy(\'Beshbarmak\',500,\'food\')">🍔 Beshbarmak - 500 ₸</div><div class="opt" onclick="buy(\'Kymyz\',1000,\'food\')">🥛 Kymyz - 1000 ₸</div><div class="opt" onclick="buy(\'New Clothes\',15000,\'clothes\')">👕 New Clothes - 15000 ₸</div><div class="opt" onclick="buy(\'New Phone\',50000,\'phone\')">📱 New Phone - 50000 ₸</div><div class="opt" onclick="buy(\'Car - Lada\',300000,\'car\')">🚗 Car Lada - 300000 ₸</div><div class="opt" onclick="buy(\'Business - Small Shop\',200000,\'biz\')">🏪 Business Small Shop - 200000 ₸</div><button class="btn ghost" onclick="closeModal()">Close</button>';
+if(t=='me')c.innerHTML='<h2>👤 My Profile</h2><p>'+document.getElementById('char-info').textContent+'</p><p>Job: '+job+' • Car: '+car+' • Friends: '+friends+' • Loan: '+loan+' ₸</p><button class="btn ghost" onclick="closeModal()">Close</button><button class="btn red" onclick="logout()">Logout / New Life</button>';}
+function visit(p){mood+=5;document.getElementById('log').textContent='Visited '+p+'! + Mood';update();closeModal();}
+function takeJob(j,p){job=j;jobPay=p;document.getElementById('log').textContent='Got job: '+j+'! Tap Work!';update();closeModal();}
+function payLoan(){if(loan<=0){alert('No loan!');return;}if(money<5000){alert('Not enough money!');return;}money-=5000;loan-=5000;if(loan<0)loan=0;document.getElementById('log').textContent='Paid loan! Left: '+loan+' ₸';update();save();closeModal();}
+function buy(n,p,kind){if(money<p){alert('Not enough money! Work first!');return;}money-=p;if(kind=='food'){hunger+=30;energy+=10;}if(kind=='clothes'){mood+=20;}if(kind=='phone'){mood+=15;}if(kind=='car'){car=n;mood+=20;}if(kind=='biz'){job='Business Owner';jobPay=8000;mood+=20;}document.getElementById('log').textContent='Bought '+n+'!';update();save();closeModal();}
+function logout(){if(confirm('Start new life? Your save will be cleared.')){localStorage.clear();location.reload();}}
+function closeModal(){document.getElementById('modal').classList.add('hidden');}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id=='modal')closeModal();});
+</script></body></html>
